@@ -239,7 +239,7 @@ button.opt:disabled{
       <h4>現在の選択</h4>
       <div class="row"><div class="k">上台戸板</div><div class="v" id="sel-door">通常</div></div>
       <div class="row"><div class="k">背板</div><div class="v" id="sel-center">通常</div></div>
-      <div class="row"><div class="k">柱(背板未選択の場合のみ選択可能)</div><div class="v" id="sel-hashira">ON</div></div>
+      <div class="row"><div class="k">柱</div><div class="v" id="sel-hashira">ON</div></div>
       <div class="row"><div class="k">内陣</div><div class="v" id="sel-back">通常</div></div>
       <div class="row"><div class="k">下台戸板</div><div class="v" id="sel-unit">通常</div></div>
     </div>
@@ -306,7 +306,7 @@ const PARTS = [
     defaultId:"on"
   },
   {
-    key:"back", jp:"内陣", layerId:"layer-back", selId:"sel-back",
+    key:"back", jp:"内陣(背板未選択の場合のみ選択可能)", layerId:"layer-back", selId:"sel-back",
     options:[
       {id:"normal",label:"通常",file:"back/back_normal.png"},
       {id:"luminous",label:"ルミナス",file:"back/back_luminous.png"},
@@ -471,6 +471,7 @@ resetAll();
 
 </body>
 </html>
+
 
 
 
