@@ -31,15 +31,16 @@ body{
 }
 
 /* ===== Layout ===== */
+/* PCは 5:5 */
 .app{
   display:grid;
-  grid-template-columns: 420px 1fr;
+  grid-template-columns:1fr 1fr;
   gap:16px;
   padding:16px;
   min-height:100vh;
 }
 
-/* iPad/スマホ：画像を先に（上）、メニューは下 */
+/* iPad/スマホ：画像を先（上）、メニューは下 */
 @media (max-width: 980px){
   .app{
     grid-template-columns: 1fr;
@@ -49,7 +50,6 @@ body{
   .menuCard{ order:1; }
 }
 
-/* iPad横〜PC：並べる */
 .menuCard{
   background:var(--panel);
   border:1px solid var(--border);
@@ -58,6 +58,7 @@ body{
   overflow:auto;
   box-shadow:var(--shadow);
   max-height:calc(100vh - 32px);
+  min-width:0;
 }
 
 .viewerCard{
@@ -75,7 +76,7 @@ body{
 /* ===== Stage ===== */
 .stage{
   position:relative;
-  width:min(900px, 100%);
+  width:100%;
   aspect-ratio: 1 / 1;
   max-height: calc(100vh - 60px);
 }
@@ -291,7 +292,7 @@ const PARTS = [
       {id:"sakuranamiki-shitan",label:"桜並木（紫丹）",file:"center/center_sakuranamiki-shitan.png"},
       {id:"sakuranamiki-w",label:"桜並木（ウォールナット）",file:"center/center_sakuranamiki-w.png"},
       {id:"towazakura-kokutan",label:"永遠桜（黒丹）",file:"center/center_towazakura-kokutan.png"},
-      {id:"towazakura-kokutan",label:"永遠桜（紫丹）",file:"center/center_towazakura-shitan.png"},
+      {id:"towazakura-shitan",label:"永遠桜（紫丹）",file:"center/center_towazakura-shitan.png"},
       {id:"towazakura-w",label:"永遠桜（ウォールナット）",file:"center/center_towazakura-w.png"},
     ],
     defaultId:"normal"
@@ -345,7 +346,6 @@ function toast(msg){
 }
 
 function setImg(id, src){
-  // キャッシュで変わらない時があるので軽くバスター
   const bust="v="+Date.now();
   $(id).src = src + (src.includes("?") ? "&"+bust : "?"+bust);
 }
@@ -377,12 +377,10 @@ function getOpt(partKey, optId){
 */
 function enforceRules(){
   const centerId = state.center;
-
   const mustHashiraOn = (centerId && centerId !== "normal");
 
   if(mustHashiraOn){
     if(state.hashira !== "on"){
-      // 強制ON
       state.hashira = "on";
       const opt = getOpt("hashira","on");
       setImg(getPart("hashira").layerId, opt.file);
@@ -392,7 +390,6 @@ function enforceRules(){
     }
   }
 
-  // ボタン無効化
   const hashWrap = document.querySelector(`[data-part="hashira"]`);
   if(hashWrap){
     const offBtn = hashWrap.querySelector(`button.opt[data-opt="off"]`);
@@ -414,7 +411,6 @@ function apply(partKey, optId, silent=false){
   setSelText(part.selId, opt.label);
   setActive(partKey, optId);
 
-  // 依存ルール適用
   enforceRules();
 
   if(!silent){
@@ -462,7 +458,6 @@ function resetAll(){
     apply(part.key, part.defaultId, true);
   });
 
-  // 初期状態のルールを適用（center normalなので hashira offも選べる状態）
   enforceRules();
   toast("初期状態に戻しました");
 }
@@ -475,8 +470,3 @@ resetAll();
 
 </body>
 </html>
-  </script>
-</body>
-
-</html>
-
