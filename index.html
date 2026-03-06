@@ -354,28 +354,19 @@ textarea{
   margin:0 0 8px 0;
 }
 
-.exportRow{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
+.exportLine{
   padding:7px 0;
   border-top:1px solid #eee;
   font-size:13px;
+  line-height:1.5;
 }
 
-.exportRow:first-child{
+.exportLine:first-of-type{
   border-top:none;
 }
 
-.exportLabel{
-  color:#666;
-  flex:0 0 90px;
-}
-
-.exportValue{
+.exportLine span{
   font-weight:700;
-  text-align:right;
-  flex:1;
 }
 
 .exportMemo{
@@ -476,14 +467,14 @@ textarea{
   </div>
 
   <div class="exportDetailSection">
-    <div class="exportSection">
-      <h3>選択仕様</h3>
-      <div class="exportRow"><div class="exportLabel">上台戸板</div><div class="exportValue" id="exp-sel-door"></div></div>
-      <div class="exportRow"><div class="exportLabel">背板</div><div class="exportValue" id="exp-sel-center"></div></div>
-      <div class="exportRow"><div class="exportLabel">背板柱</div><div class="exportValue" id="exp-sel-hashira"></div></div>
-      <div class="exportRow"><div class="exportLabel">内陣</div><div class="exportValue" id="exp-sel-back"></div></div>
-      <div class="exportRow"><div class="exportLabel">下台戸板</div><div class="exportValue" id="exp-sel-unit"></div></div>
-    </div>
+<div class="exportSection">
+  <h3>選択仕様</h3>
+  <div class="exportLine">上台戸板：<span id="exp-sel-door"></span></div>
+  <div class="exportLine">背板：<span id="exp-sel-center"></span></div>
+  <div class="exportLine">背板柱：<span id="exp-sel-hashira"></span></div>
+  <div class="exportLine">内陣：<span id="exp-sel-back"></span></div>
+  <div class="exportLine">下台戸板：<span id="exp-sel-unit"></span></div>
+</div>
 
     <div class="exportSection">
       <h3>備考</h3>
@@ -781,4 +772,5 @@ resetAll();
 
 </body>
 </html>
+
 
